@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 import { ListItem } from "../ListItem";
 
@@ -56,6 +56,9 @@ describe('ListItem', () => {
                 item='Lorem ipsum dolor sit amet consectetur'
             />
         );
+            
+        const checkbox = getByTestId('test-list-item-1');
+        fireEvent.click(checkbox);
         expect(mockOnCheck.mock.calls).toHaveLength(1);
     });
 
@@ -69,7 +72,8 @@ describe('ListItem', () => {
                 item='Lorem ipsum dolor sit amet consectetur'
             />
         );
-        expect(mockOnCheck.mock.calls).toHaveLength(1);
+        const container = getByTestId('test-list-item-1-container');
+        expect(mockOnCheck).not.toHaveBeenCalled();
     });
 
     //TODO: implement this
